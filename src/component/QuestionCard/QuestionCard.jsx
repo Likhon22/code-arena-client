@@ -3,6 +3,7 @@ import { createAnswer, getAnswer } from "../../api/answer"; // Ensure correct im
 import toast from "react-hot-toast"; // Ensure toast import
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
 const QuestionCard = ({ questionData }) => {
   const [liked, setLiked] = useState(false);
@@ -13,6 +14,7 @@ const QuestionCard = ({ questionData }) => {
   const handleSeeMore = () => {
     navigate("/all-answers", { state: { questionData } });
   };
+  const { user } = useAuth();
   // Fetch answers for the specific question using questionData._id
   const {
     data: answers = [], // Default to an empty array
@@ -28,10 +30,6 @@ const QuestionCard = ({ questionData }) => {
     },
   });
 
-  const handleLike = () => {
-    setLiked(!liked);
-  };
-
   const handleCommentToggle = () => {
     setShowCommentInput(!showCommentInput);
   };
@@ -45,6 +43,7 @@ const QuestionCard = ({ questionData }) => {
       questionId: questionData._id, // Reference to the specific question
       userName: questionData.userName, // Assuming you have the user's name
       answer: comment,
+      email: user?.email,
     };
 
     try {

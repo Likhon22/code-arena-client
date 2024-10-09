@@ -19,7 +19,7 @@ const Home = () => {
             Welcome to CodeArena, your one-stop destination for unlocking the
             full potential of your computer science education. We understand the
             challenges students face when it comes to accessing high-quality
-            learning resources in the Bangla language. CodeArena is here to
+            learning resources. CodeArena is here to
             bridge that gap, providing you with a comprehensive online platform
             designed specifically for computer science enthusiasts at the
             university level.
@@ -50,7 +50,7 @@ const Home = () => {
             <h2>Why CodeArena?</h2>
             <p>
               The motivation behind CodeArena stems from the absence of a
-              dedicated platform for learning computer science in Bangla. Our
+              dedicated platform for learning computer science in. Our
               goal is to empower students, like yourself, with a resource that
               makes it easier to clarify concepts, excel in studies, and pursue
               a successful career in the field.
@@ -80,8 +80,8 @@ const Home = () => {
         </div>
         <a href="subjects/computer_courses.html">
           <div className="s-card">
-            <img src={service1} alt="University-Level CSE Bangla Content" />
-            <p>University-Level CSE Bangla Content</p>
+            <img src={service1} alt="University-Level CSE Content" />
+            <p>University-Level CSE Content</p>
           </div>
         </a>
         <a href="subjects/jee.html">
@@ -232,7 +232,7 @@ const Home = () => {
         >
           <div className="marqu">
             Discover the power of CodeArena! Your gateway to comprehensive CSE
-            learning in Bangla. Join our vibrant community today.
+            learning in. Join our vibrant community today.
           </div>
         </marquee>
       </div>

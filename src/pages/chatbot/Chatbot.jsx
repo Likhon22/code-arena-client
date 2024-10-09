@@ -71,7 +71,11 @@ const Chatbot = () => {
                 sequence={[`${response}`, 1000]}
                 wrapper="span"
                 speed={50}
-                style={{ fontSize: "2em", display: "inline-block" }}
+                style={{
+                  color: "white",
+                  fontSize: "2em",
+                  display: "inline-block",
+                }}
                 repeat={1}
               />
             ) : (

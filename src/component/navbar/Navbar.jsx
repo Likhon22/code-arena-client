@@ -86,6 +86,21 @@ const Navbar = () => {
               Chatbot
             </NavLink>
           </li>
+          <li>
+            {user && user?.email && (
+              <NavLink
+                className={({ isActive }) =>
+                  isActive
+                    ? "bg-transparent border border-[#1e3d59] font-bold text-black rounded-lg "
+                    : " text-white bg-black active"
+                }
+                to={"/dashboard"}
+                href=""
+              >
+                Dashboard
+              </NavLink>
+            )}
+          </li>
         </ul>
         <div className="srch">
           <input type="text" className="search" placeholder="Search here..." />

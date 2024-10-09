@@ -11,6 +11,7 @@ import PrivateRoute from "./PrivateRoute";
 import BookContent from "../pages/bookContents/BookContent";
 import Chapter1 from "../pages/bookContents/Chapter1";
 import Chapter2 from "../pages/bookContents/Chapter2";
+import UserProfile from "../pages/userProfile/UserProfile";
 
 const router = createBrowserRouter([
   {
@@ -65,6 +66,10 @@ const router = createBrowserRouter([
       {
         path: "/chapter-2",
         element: <Chapter2></Chapter2>,
+      },
+      {
+        path: "/dashboard",
+        element: <UserProfile></UserProfile>,
       },
     ],
   },

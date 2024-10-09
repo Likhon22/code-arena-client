@@ -56,7 +56,10 @@ const Question = () => {
     };
 
     await createQuestion(submittedData);
+
     refetch();
+    e.target.reset();
+    document.getElementById("my_modal_1").close();
     toast.success("Question added successfully");
   };
 
