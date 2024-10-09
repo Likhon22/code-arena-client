@@ -9,12 +9,10 @@ const Main = () => {
   const location = useLocation();
   const noNavbarFooter = location?.pathname.includes("/register");
   return (
-    <div>
-      <header id="header">
-        {noNavbarFooter ? "" : <Navbar></Navbar>}
-        <Outlet></Outlet>
-        {noNavbarFooter ? "" : <MainFooter></MainFooter>}
-      </header>
+    <div className="min-h-screen">
+      {noNavbarFooter ? "" : <Navbar></Navbar>}
+      <Outlet></Outlet>
+      {noNavbarFooter ? "" : <MainFooter></MainFooter>}
     </div>
   );
 };

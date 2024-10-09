@@ -1,0 +1,5 @@
+.row {
+  flex-direction: flex;
+  justify-items: center;
+  align-items: center;
+}

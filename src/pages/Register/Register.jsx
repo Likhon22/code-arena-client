@@ -6,9 +6,59 @@ import insta from "../../assets/images/icon/insta2.png";
 import user from "../../assets/images/icon/user.png";
 import password from "../../assets/images/icon/password.png";
 import google from "../../assets/images/icon/google.png";
+import useAuth from "../../hooks/useAuth";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import profileImg from "../../assets/images/icon/profile.png";
+import { createUser } from "../../api/user";
 
 const Register = () => {
-  const [isLogin, setIsLogin] = useState(true); // Track form toggle
+  const [isLogin, setIsLogin] = useState(true);
+  const [isChecked, setIsChecked] = useState(false);
+  const navigate = useNavigate();
+  const { register, update, login } = useAuth();
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+
+    const name = form.name.value;
+    const email = form.email.value;
+    const profile = profileImg;
+    const password = form.password.value;
+    if (!isChecked) {
+      toast.error("Please agree to the terms and conditions");
+      return;
+    }
+
+    const userInfo = {
+      name,
+      email,
+      password,
+      profile,
+    };
+    console.log(userInfo);
+    try {
+      const data = await register(email, password);
+      const updateProfile = await update(name, profile);
+
+      await createUser(userInfo);
+      console.log(data);
+
+      navigate("/");
+      toast.success("Registered Successfully");
+    } catch (err) {
+      toast.error(err.message);
+    }
+  };
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    await login(email, password);
+    toast.success("Logged In Successfully");
+    navigate("/");
+  };
 
   return (
     <div className="register">
@@ -39,13 +89,17 @@ const Register = () => {
         {/* Conditionally Render Form */}
         {isLogin ? (
           // Login Form
-          <form className="input-group flex flex-col justify-center items-center">
+          <form
+            className="input-group flex flex-col justify-center items-center"
+            onSubmit={handleLogin}
+          >
             <div className="input-with-icon flex items-center">
               <img src={user} alt="User Icon" className="icon" />
               <input
                 type="text"
                 className="input-field"
-                placeholder="Username "
+                placeholder="Email"
+                name="email"
                 required
               />
             </div>
@@ -54,6 +108,7 @@ const Register = () => {
               <input
                 type="password"
                 className="input-field"
+                name="password"
                 placeholder="Password"
                 required
               />
@@ -67,13 +122,14 @@ const Register = () => {
           </form>
         ) : (
           // Register Form
-          <form className="input-group">
+          <form className="input-group" onSubmit={handleRegister}>
             <div className="input-with-icon flex items-center ">
               <img src={user} alt="User Icon" className="icon" />
               <input
                 type="text"
                 className="input-field"
                 placeholder="Full Name"
+                name="name"
                 required
               />
             </div>
@@ -82,6 +138,7 @@ const Register = () => {
               <input
                 type="email"
                 className="input-field"
+                name="email"
                 placeholder="Email Address"
                 required
               />
@@ -90,26 +147,24 @@ const Register = () => {
               <img src={password} alt="Password Icon" className="icon" />
               <input
                 type="password"
+                name="password"
                 className="input-field"
                 placeholder="Create Password"
                 required
               />
             </div>
-            <div className="input-with-icon flex items-center ">
-              <img src={password} alt="Password Icon" className="icon" />
-              <input
-                type="password"
-                className="input-field"
-                placeholder="Confirm Password"
-                required
-              />
-            </div>
+
             <div className="terms flex items-center ">
-              <input type="checkbox" className="check-box" required /> I agree
-              to the Terms & Conditions
+              <input
+                onChange={() => setIsChecked(!isChecked)}
+                type="checkbox"
+                className="check-box"
+                required
+              />{" "}
+              I agree to the Terms & Conditions
             </div>
-            <div className="flex justify-center">
-              <button type="submit" className="submit-btn reg-btn">
+            <div className="flex justify-center ">
+              <button type="submit" className="submit-btn  bg-[#1e3d59]">
                 Register
               </button>
             </div>
